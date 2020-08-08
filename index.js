@@ -26,6 +26,7 @@ const DEFAULT_TIME_LABELS = {
 class CountDown extends React.Component {
   static propTypes = {
     id: PropTypes.string,
+    countDownContainerStyle: PropTypes.object,
     digitStyle: PropTypes.object,
     digitTxtStyle: PropTypes.object,
     timeLabelStyle: PropTypes.object,
@@ -191,7 +192,7 @@ class CountDown extends React.Component {
   };
 
   renderCountDown = () => {
-    const {timeToShow, timeLabels, showSeparator} = this.props;
+    const {timeToShow, timeLabels, showSeparator, countDownContainerStyle} = this.props;
     const {until} = this.state;
     const {days, hours, minutes, seconds} = this.getTimeLeft();
     const newTime = sprintf('%02d:%02d:%02d:%02d', days, hours, minutes, seconds).split(':');
@@ -199,7 +200,7 @@ class CountDown extends React.Component {
 
     return (
       <Component
-        style={styles.timeCont}
+        style={{...styles.timeCont, ...countDownContainerStyle}}
         onPress={this.props.onPress}
       >
         {timeToShow.includes('D') ? this.renderDoubleDigits(timeLabels.d, newTime[0]) : null}
@@ -223,6 +224,7 @@ class CountDown extends React.Component {
 }
 
 CountDown.defaultProps = {
+  countDownContainerStyle: {},
   digitStyle: DEFAULT_DIGIT_STYLE,
   digitTxtStyle: DEFAULT_DIGIT_TXT_STYLE,
   timeLabelStyle: DEFAULT_TIME_LABEL_STYLE,
