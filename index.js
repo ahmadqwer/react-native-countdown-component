@@ -200,7 +200,7 @@ class CountDown extends React.Component {
 
     return (
       <Component
-        style={{...styles.timeCont, ...countDownContainerStyle}}
+      style={[styles.timeCont,countDownContainerStyle]}
         onPress={this.props.onPress}
       >
         {timeToShow.includes('D') ? this.renderDoubleDigits(timeLabels.d, newTime[0]) : null}
